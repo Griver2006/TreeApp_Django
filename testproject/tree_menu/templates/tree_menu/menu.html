@@ -1,0 +1,14 @@
+{% for item, children in menu_tree %}
+    <li>
+        <a href="{% if item.named_url %}{% url item.named_url %}{% else %}{{ item.url }}{% endif %}">
+            {{ item.title }}
+        </a>
+        {% if children %}
+            <ul>
+                {% with menu_tree=children %}
+                    {% include "tree_menu/menu.html" %}
+                {% endwith %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}
